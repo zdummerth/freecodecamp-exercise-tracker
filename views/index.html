@@ -60,7 +60,6 @@
         number
       </p>
       <form id="exercise-logs">
-        <input id="uid" type="text" name=":_id" placeholder=":_id" />
         <input
           id="from"
           type="text"
@@ -94,9 +93,9 @@
         const to = document.getElementById("to").value;
         const limit = document.getElementById("limit").value;
 
-        exerciseLogs.action = `/api/users/${userId}/logs${
-          from && `?from=${from}`
-        }${to && from && `&to=${to}`}${limit && `limit=${limit}`}`;
+        exerciseLogs.action = `/api/users/${userId}/logs?${
+          from && `from=${from}`
+        }${to && from && `&to=${to}`}${limit && `&limit=${limit}`}`;
 
         exerciseLogs.submit();
       });
