@@ -85,53 +85,53 @@ app.get("/api/users", async function (req, res) {
 
 app.post("/api/users/:_id/exercises", async function (req, res) {
   console.log(req.params);
-  // if (req.params._id === "0") {
-  //   return res.json({ error: "_id is required" });
-  // }
+  if (req.params._id === "0") {
+    return res.json({ error: "_id is required" });
+  }
 
-  // if (req.body.description === "") {
-  //   return res.json({ error: "description is required" });
-  // }
+  if (req.body.description === "") {
+    return res.json({ error: "description is required" });
+  }
 
-  // if (req.body.duration === "") {
-  //   return res.json({ error: "duration is required" });
-  // }
+  if (req.body.duration === "") {
+    return res.json({ error: "duration is required" });
+  }
 
-  // let userId = req.params._id;
-  // let description = req.body.description;
-  // let duration = parseInt(req.body.duration);
-  // let date = req.body.date ? new Date(req.body.date) : new Date();
+  let userId = req.params._id;
+  let description = req.body.description;
+  let duration = parseInt(req.body.duration);
+  let date = req.body.date ? new Date(req.body.date) : new Date();
 
-  // if (isNaN(duration)) {
-  //   return res.json({ error: "duration is not a number" });
-  // }
+  if (isNaN(duration)) {
+    return res.json({ error: "duration is not a number" });
+  }
 
-  // if (date == "Invalid Date") {
-  //   return res.json({ error: "date is invalid" });
-  // }
+  if (date == "Invalid Date") {
+    return res.json({ error: "date is invalid" });
+  }
 
-  // try {
-  //   const user = await ExerciseUsers.findOne({ _id: userId });
-  //   if (!user) {
-  //     return res.json({ error: "user not found" });
-  //   }
-  //   const newExercise = await Exercises.create({
-  //     userId,
-  //     description: description,
-  //     duration: duration,
-  //     date: date,
-  //   });
-  //   return res.json({
-  //     _id: userId,
-  //     username: user["username"],
-  //     description: newExercise["description"],
-  //     duration: newExercise["duration"],
-  //     date: new Date(newExercise["date"]).toDateString(),
-  //   });
-  // } catch (error) {
-  //   console.log(error);
-  //   return res.json({ error: "user not found" });
-  // }
+  try {
+    const user = await ExerciseUsers.findOne({ _id: userId });
+    if (!user) {
+      return res.json({ error: "user not found" });
+    }
+    const newExercise = await Exercises.create({
+      userId,
+      description: description,
+      duration: duration,
+      date: date,
+    });
+    return res.json({
+      _id: userId,
+      username: user["username"],
+      description: newExercise["description"],
+      duration: newExercise["duration"],
+      date: new Date(newExercise["date"]).toDateString(),
+    });
+  } catch (error) {
+    console.log(error);
+    return res.json({ error: "user not found" });
+  }
 });
 
 app.get("/api/users/:_id/exercises", function (req, res) {
